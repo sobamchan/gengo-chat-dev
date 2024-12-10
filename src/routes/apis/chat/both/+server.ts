@@ -1,6 +1,6 @@
 import { ChatOllama } from '@langchain/ollama';
 import { json } from '@sveltejs/kit';
-import { REPLICATE_API_TOKEN } from '$env/dynamic/private';
+import { REPLICATE_API_TOKEN } from '$env/static/private';
 import Replicate from 'replicate';
 import { ModelType } from '$lib/llm';
 

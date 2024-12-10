@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { REPLICATE_API_TOKEN } from '$env/dynamic/private';
+import { REPLICATE_API_TOKEN } from '$env/static/private';
 import Replicate from 'replicate';
 
 const replicate = new Replicate({
