@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import { QdrantClient } from '@qdrant/js-client-rest';
-import { QDRANT_KEY, QDRANT_URL } from '$env/static/private';
+import { QDRANT_KEY, QDRANT_URL } from '$env/dynamic/private';
 
 const client = new QdrantClient({
 	url: QDRANT_URL,
