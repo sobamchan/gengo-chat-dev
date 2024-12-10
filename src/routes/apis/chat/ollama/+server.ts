@@ -4,7 +4,8 @@ import { ChatOllama } from '@langchain/ollama';
 const llm = new ChatOllama({
 	model: 'gemma2:2b',
 	temperature: 0,
-	maxRetries: 0
+	maxRetries: 0,
+	baseUrl: '0.0.0.0:11434'
 });
 
 export async function POST({ request }) {
