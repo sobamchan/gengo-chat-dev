@@ -36,7 +36,7 @@
 	const exampleQueries = [
 		'Give me an overview of use of LLMs for evaluating summaries.',
 		'What is ROUGE-K?',
-		'What is Generative Retrieval',
+		'What is Generative Retrieval?',
 		'List limitations of ROUGE evaluation metric.'
 	];
 	const handleExampleClick = (event) => {
@@ -132,7 +132,7 @@
 </script>
 
 <div class="h-full">
-	<div class="h-full px-4 md:px-48">
+	<div class="h-full px-4 lg:px-48">
 		<div class="grid grid-row-[1fr_3fr_auto] gap-1">
 			{#if selectedPaper != null}
 				<div
@@ -140,11 +140,11 @@
 					tabindex="-1"
 					aria-hidden="true"
 					class:hidden={isHiddenModal}
-					class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:px-48 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+					class="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 lg:px-48 justify-center items-center w-full lg:inset-0 h-[calc(100%-1rem)] max-h-full"
 				>
 					<div class="relative p-4 w-full max-h-full">
-						<div class="flex items-center justify-between p-4 md:p-5">
-							<div class="p-4 md:p-5 space-y-4 bg-surface-300 rounded-md">
+						<div class="flex items-center justify-between p-4 lg:p-5">
+							<div class="p-4 lg:p-5 space-y-4 bg-surface-300 rounded-md">
 								<PaperComponent isHilighted={false} paper={selectedPaper} />
 								<button on:click={handleCloseModal} class="btn btn-sm variant-ghost float-right">
 									Close
@@ -180,14 +180,14 @@
 				<input
 					type="text"
 					bind:value={currentMessage}
-					class="bg-transparent border-0 ring-0 text-xs"
+					class="bg-transparent border-0 ring-0 text-sm font-light"
 					name="prompt"
 					id="prompt"
 					placeholder="Write a message..."
 					disabled={isGenerating}
 				/>
 				<button
-					class="variant-filled-primary text-xs"
+					class="variant-filled-primary text-sm font-light"
 					on:click={chatSubmitHandler}
 					disabled={isGenerating}
 					type="submit"
@@ -197,12 +197,12 @@
 			</form>
 
 			{#if messages.length === 0}
-				<div class="m-2 mx-2 md:mx-32">
+				<div class="m-2 mx-2 lg:mx-32">
 					<div class="text-sm font-light">Example Queries</div>
-					<div class="grid grid-cols-2">
+					<div class="grid grid-cols-1 xl:grid-cols-2">
 						{#each exampleQueries as exampleQuery}
 							<button
-								class="bg-surface-500 rounded-md font-normal m-1 truncate"
+								class="bg-surface-500 rounded-sm font-light m-1 py-1 px-2 truncate hover:bg-surface-400"
 								on:click={handleExampleClick}
 							>
 								{exampleQuery}
