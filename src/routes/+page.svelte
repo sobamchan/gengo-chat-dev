@@ -133,6 +133,17 @@
 
 <div class="h-full">
 	<div class="h-full px-4 lg:px-48">
+		<!-- ALERT -->
+		<div class="alert variant-filled-warning my-4">
+			<div class="alert-message">
+				<p>
+					GENGO-Chat is under a heavy development. Many things are not functioning at the moment.
+					Please do not execute queries too much. It will stop the core LLM functionality.
+				</p>
+			</div>
+		</div>
+
+		<!-- MAIN STUFF -->
 		<div class="grid grid-row-[1fr_3fr_auto] gap-1">
 			{#if selectedPaper != null}
 				<div
