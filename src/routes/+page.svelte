@@ -31,7 +31,18 @@
 		}
 	});
 
-	let currentMessage = 'Give me an overview of use of LLMs for evaluating summaries.';
+	let currentMessage = '';
+
+	const exampleQueries = [
+		'Give me an overview of use of LLMs for evaluating summaries.',
+		'What is ROUGE-K?',
+		'What is Generative Retrieval',
+		'List limitations of ROUGE evaluation metric.'
+	];
+	const handleExampleClick = (event) => {
+		currentMessage = event.target.innerText;
+		chatSubmitHandler();
+	};
 
 	let messages: Message[] = [];
 
@@ -123,15 +134,6 @@
 <div class="h-full">
 	<div class="h-full px-4 md:px-48">
 		<div class="grid grid-row-[1fr_3fr_auto] gap-1">
-			<!-- Papers -->
-			<!-- {#if papers.papers.length > 0}
-				<div class="h-80 w-full overflow-x-scroll">
-					{#each papers.papers as pap}
-						<PaperComponent isHilighted={pap.index === highlightPaperIndex} paper={pap} />
-					{/each}
-				</div>
-			{/if} -->
-
 			{#if selectedPaper != null}
 				<div
 					id="default-modal"
@@ -173,12 +175,12 @@
 				</div>
 			{/if}
 			<form
-				class="w-full input-group input-group-divider grid-cols-[1fr_auto] rounded-container-token"
+				class="w-full input-group input-group-divider grid-cols-[1fr_auto] rounded-container-token my-8"
 			>
 				<input
 					type="text"
 					bind:value={currentMessage}
-					class="bg-transparent border-0 ring-0 text-sm"
+					class="bg-transparent border-0 ring-0 text-xs"
 					name="prompt"
 					id="prompt"
 					placeholder="Write a message..."
@@ -193,27 +195,22 @@
 					Send
 				</button>
 			</form>
-			<!-- <div class="">
-				<div
-					class="w-full input-group input-group-divider grid-cols-[1fr_auto] rounded-container-token"
-				>
-					<textarea
-						bind:value={currentMessage}
-						class="bg-transparent border-0 ring-0 text-sm"
-						name="prompt"
-						id="prompt"
-						placeholder="Write a message..."
-						rows="1"
-					/>
-					<button
-						class="variant-filled-primary text-xs"
-						on:click={chatSubmitHandler}
-						disabled={isGenerating}
-					>
-						Send
-					</button>
+
+			{#if messages.length === 0}
+				<div class="m-2 mx-2 md:mx-32">
+					<div class="text-sm font-light">Example Queries</div>
+					<div class="grid grid-cols-2">
+						{#each exampleQueries as exampleQuery}
+							<button
+								class="bg-surface-500 rounded-md font-normal m-1 truncate"
+								on:click={handleExampleClick}
+							>
+								{exampleQuery}
+							</button>
+						{/each}
+					</div>
 				</div>
-			</div> -->
+			{/if}
 		</div>
 	</div>
 </div>

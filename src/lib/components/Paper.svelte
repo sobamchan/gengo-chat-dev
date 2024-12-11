@@ -66,7 +66,7 @@
 				<td class="align-text-top">
 					<span class="font-semibold rounded-sm italic mx-1">Challenge: </span>
 				</td>
-				<td class="px-2 text-left">
+				<td class="px-2 text-left text-sm">
 					{paper.summaries.challenge}
 				</td>
 			</tr>
