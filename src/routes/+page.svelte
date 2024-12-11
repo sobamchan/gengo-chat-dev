@@ -144,7 +144,9 @@
 						<div class="flex items-center justify-between p-4 md:p-5">
 							<div class="p-4 md:p-5 space-y-4 bg-surface-300 rounded-md">
 								<PaperComponent isHilighted={false} paper={selectedPaper} />
-								<button on:click={handleCloseModal} class="btn btn-sm variant-ghost">Close</button>
+								<button on:click={handleCloseModal} class="btn btn-sm variant-ghost float-right">
+									Close
+								</button>
 							</div>
 						</div>
 					</div>
