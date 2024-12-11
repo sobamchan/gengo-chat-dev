@@ -17,12 +17,14 @@
 	<span class="fond-bold text-sm text-left">[{paper.index}]</span>
 	<a
 		rel="external"
-		href="/{paper.url}"
+		href="https://gengo.sotaro.io/{paper.url}"
+		target="_blank"
 		class="underline font-bold hover:bg-secondary-500/50 text-sm text-left">{paper.paperTitle}</a
 	>
 	<a
 		rel="external"
-		href="/volumes/{paper.volumeId}"
+		href="https://gengo.sotaro.io/volumes/{paper.volumeId}"
+		target="_blank"
 		class="underline hover:bg-secondary-500/50 text-sm ml-1">({paper.volumeId})</a
 	>
 	{#if paper.url}
@@ -39,7 +41,8 @@
 		{#each paper.authors as author, i}
 			<a
 				rel="external"
-				href="/author/{author.first}_{author.last}"
+				href="https://gengo.sotaro.io/author/{author.first}_{author.last}"
+				target="_blank"
 				class="underline hover:bg-secondary-500/50"
 			>
 				{author.first}
@@ -51,7 +54,8 @@
 		{#each paper.fieldOfStudies as fos}
 			<a
 				rel="external"
-				href="/fos/{fos}"
+				href="https://gengo.sotaro.io/fos/{fos}"
+				target="_blank"
 				class="text-xs p-0.5 rounded-sm bg-tertiary-300 dark:bg-tertiary-900">{fos}</a
 			>
 		{/each}
