@@ -211,7 +211,7 @@
 					class="bg-transparent border-0 ring-0 text-sm font-light"
 					name="prompt"
 					id="prompt"
-					placeholder="Write a message..."
+					placeholder="Write a message...(⌘ + k)"
 					disabled={isGenerating}
 					bind:this={queryFormInput}
 				/>
