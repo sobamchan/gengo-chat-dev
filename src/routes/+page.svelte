@@ -31,6 +31,7 @@
 		}
 	});
 
+	let queryFormInput;
 	let currentMessage = '';
 
 	const exampleQueries = [
@@ -129,7 +130,23 @@
 		goto('/', { replaceState: false });
 	};
 	$: handleFetch($page.url.search);
+
+	function onKeyDown(e) {
+		switch (e.keyCode) {
+			case 75:
+				if (e.metaKey) {
+					e.preventDefault();
+					queryFormInput.focus();
+				}
+				break;
+			case 27:
+				queryFormInput.blur();
+				break;
+		}
+	}
 </script>
+
+<svelte:window on:keydown={onKeyDown} />
 
 <div class="h-full">
 	<div class="h-full px-4 lg:px-48">
@@ -196,6 +213,7 @@
 					id="prompt"
 					placeholder="Write a message..."
 					disabled={isGenerating}
+					bind:this={queryFormInput}
 				/>
 				<button
 					class="variant-filled-primary text-sm font-light"
