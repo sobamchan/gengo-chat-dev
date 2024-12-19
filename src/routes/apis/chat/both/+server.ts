@@ -1,7 +1,8 @@
 import { ChatOllama } from '@langchain/ollama';
 import { json } from '@sveltejs/kit';
-import { REPLICATE_API_TOKEN } from '$env/static/private';
+import { REPLICATE_API_TOKEN, TOGETHERAI_API_TOKEN } from '$env/static/private';
 import Replicate from 'replicate';
+import Together from 'together-ai';
 import { ModelType } from '$lib/llm';
 
 export const _generate = async (
@@ -12,8 +13,10 @@ export const _generate = async (
 	if (modelID === null) {
 		if (modelType === ModelType.ollama) {
 			modelID = 'gemma2:2b';
-		} else {
+		} else if (ModelType === ModelType.replicate) {
 			modelID = 'meta/meta-llama-3-8b-instruct';
+		} else {
+			modelID = 'meta-llama/Llama-3.3-70B-Instruct-Turbo';
 		}
 	}
 
@@ -50,6 +53,15 @@ export const _generate = async (
 		};
 		const response = await replicate.run(modelID, { input });
 		responseStr = response.join('');
+	} else if (modelType === ModelType.togetherai) {
+		const together = new Together({ apiKey: TOGETHERAI_API_TOKEN });
+		const response = await together.chat.completions.create({
+			model: modelID,
+			messages: [{ role: 'user', content: message }]
+		});
+
+		const output: string = response.choices[0].message.content;
+		responseStr = output;
 	}
 	return responseStr;
 };
@@ -63,7 +75,8 @@ export async function POST({ request }) {
 		_modelType = 'replicate';
 	}
 	const modelType = ModelType[_modelType];
+	const modelID = j['modelID'];
 
-	const out = await _generate(message, modelType);
+	const out = await _generate(message, modelType, modelID);
 	return json({ content: out }, { status: 201 });
 }

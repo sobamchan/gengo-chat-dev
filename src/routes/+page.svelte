@@ -18,12 +18,19 @@
 
 	let selectedModel = ModelType.replicate;
 	let documentNumber = 15;
+	let modelID = 'meta-llama/Llama-3.3-70B-Instruct-Turbo';
 	onMount(async () => {
 		let _currentSelectedModel = localStorage.getItem('modelType');
 		if (_currentSelectedModel === null) {
 			_currentSelectedModel === 'replicate';
 		}
 		selectedModel = ModelType[_currentSelectedModel];
+
+		let currentModelID = localStorage.getItem('modelID');
+		if (currentModelID !== null) {
+			modelID = currentModelID;
+			console.log(modelID);
+		}
 
 		let _currentDocumentNumber = localStorage.getItem('documentNumber');
 		if (_currentDocumentNumber !== null) {
@@ -86,7 +93,11 @@
 
 				fetch('/apis/chat/both', {
 					method: 'POST',
-					body: JSON.stringify({ message: prompt, modelType: selectedModel }),
+					body: JSON.stringify({
+						message: prompt,
+						modelType: selectedModel,
+						modelID: modelID
+					}),
 					headers: { 'Content-Type': 'application/json' }
 				}).then(async (r) => {
 					const j = await r.json();

@@ -50,6 +50,7 @@
 		"marked": "^15.0.0",
 		"ollama": "^0.5.9",
 		"replicate": "^1.0.1",
-		"snarkdown": "^1.0.2"
+		"snarkdown": "^1.0.2",
+		"together-ai": "^0.10.0"
 	}
 }
