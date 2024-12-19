@@ -20,6 +20,10 @@ export const _generate = async (
 		}
 	}
 
+	if (modelType === ModelType.replicate) {
+		modelID = 'meta/meta-llama-3-8b-instruct';
+	}
+
 	console.log(modelType);
 	console.log(modelID);
 

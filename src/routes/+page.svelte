@@ -85,7 +85,7 @@
 			const messageToSend = currentMessage;
 			currentMessage = '';
 
-			const searchQuery = await fromInputToQuery(messageToSend, selectedModel);
+			const searchQuery = await fromInputToQuery(messageToSend, selectedModel, modelID);
 			console.log(searchQuery);
 			await getPapersByQuery(searchQuery).then((paperList) => {
 				const prompt = prompter.generate(paperList, messageToSend);
