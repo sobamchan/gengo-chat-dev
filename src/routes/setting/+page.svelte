@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 
 	const modelOptions = ['ollama', 'replicate', 'togetherai'];
-	let selectedModel = modelOptions[1];
+	let selectedModel = modelOptions[2];
 
 	let documentNumber = 8;
 	let max = 30;
