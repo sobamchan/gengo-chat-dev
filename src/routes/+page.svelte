@@ -17,7 +17,7 @@
 	import { ModelType } from '$lib/llm';
 
 	let selectedModel = ModelType.togetherai;
-	let documentNumber = 15;
+	let documentNumber = 10;
 	let modelID = 'meta-llama/Llama-3.3-70B-Instruct-Turbo';
 	onMount(async () => {
 		let _currentSelectedModel = localStorage.getItem('modelType');

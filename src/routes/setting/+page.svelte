@@ -5,7 +5,7 @@
 	const modelOptions = ['ollama', 'replicate', 'togetherai'];
 	let selectedModel = modelOptions[2];
 
-	let documentNumber = 8;
+	let documentNumber = 10;
 	let max = 30;
 
 	let modelName = 'meta-llama/Llama-3.3-70B-Instruct-Turbo';
