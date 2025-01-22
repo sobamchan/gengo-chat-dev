@@ -16,13 +16,13 @@
 	import { onMount } from 'svelte';
 	import { ModelType } from '$lib/llm';
 
-	let selectedModel = ModelType.replicate;
+	let selectedModel = ModelType.togetherai;
 	let documentNumber = 15;
 	let modelID = 'meta-llama/Llama-3.3-70B-Instruct-Turbo';
 	onMount(async () => {
 		let _currentSelectedModel = localStorage.getItem('modelType');
 		if (_currentSelectedModel === null) {
-			_currentSelectedModel === 'replicate';
+			_currentSelectedModel === 'togetherai';
 		}
 		selectedModel = ModelType[_currentSelectedModel];
 
