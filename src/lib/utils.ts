@@ -1,8 +1,13 @@
 export function extractPUIDsFromResponse(res: string): string[] {
 	const regexp = /[ \(\[]PUID: ?\d+[ \)\]]/g;
-	let stringPUIDs = [...res.match(regexp).map((r) => String(r))];
-	stringPUIDs = [...new Set(stringPUIDs)];
-	return [...stringPUIDs.sort((a, b) => PUIDToIdx(a) - PUIDToIdx(b))];
+	const matches = res.match(regexp);
+	if (matches == null) {
+		return [];
+	} else {
+		let stringPUIDs = [...matches.map((r) => String(r))];
+		stringPUIDs = [...new Set(stringPUIDs)];
+		return [...stringPUIDs.sort((a, b) => PUIDToIdx(a) - PUIDToIdx(b))];
+	}
 }
 
 export function PUIDToIdx(PUID: string): number {
