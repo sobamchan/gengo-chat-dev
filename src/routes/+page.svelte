@@ -290,6 +290,15 @@
 				</div>
 			{/if}
 		</div>
+
+		{#if papers.papers.length !== 0}
+			<div class="my-8">
+				<h2 class="">References</h2>
+				{#each papers.papers as p}
+					<PaperComponent paper={p} />
+				{/each}
+			</div>
+		{/if}
 	</div>
 </div>
 
