@@ -3,7 +3,7 @@
 	import { QdrantClient } from '@qdrant/js-client-rest';
 	import { pipeline } from '@xenova/transformers';
 	import { Paper, PaperList } from '$lib/paper';
-	import { fromInputToQuery } from '$lib/QueryGenerator';
+	import { fromInputAndHistoryToQuery, fromInputToQuery } from '$lib/QueryGenerator';
 	import { default as UserPost } from '$lib/components/UserPost.svelte';
 	import { default as SystemPost } from '$lib/components/SystemPost.svelte';
 	import { default as PaperComponent } from '$lib/components/Paper.svelte';
@@ -85,7 +85,19 @@
 			const messageToSend = currentMessage;
 			currentMessage = '';
 
-			const searchQuery = await fromInputToQuery(messageToSend, selectedModel, modelID);
+			let searchQuery;
+			console.log(messages);
+			if (messages.length === 1) {
+				searchQuery = await fromInputToQuery(messageToSend, selectedModel, modelID);
+			} else {
+				searchQuery = await fromInputAndHistoryToQuery(
+					messages,
+					messageToSend,
+					selectedModel,
+					modelID
+				);
+			}
+
 			console.log(searchQuery);
 			await getPapersByQuery(searchQuery).then((paperList) => {
 				const prompt = prompter.generate(paperList, messageToSend);
