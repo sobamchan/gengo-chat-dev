@@ -22,7 +22,6 @@
 	</svelte:fragment>
 	<slot />
 </AppShell> -->
-
 <AppShell>
 	<svelte:fragment slot="header">
 		<AppBar>

@@ -1,3 +1,5 @@
+import { Message } from './message';
+
 export function extractPUIDsFromResponse(res: string): string[] {
 	const regexp = /[ \(\[]PUID: ?\d+[ \)\]]/g;
 	const matches = res.match(regexp);
@@ -24,4 +26,31 @@ export function PUIDToIdx(PUID: string): number {
 			return -1;
 		}
 	}
+}
+
+export function formatHistory(
+	userInputs: string[],
+	searchQueries: string[],
+	prompts: string[],
+	modelResponses: string[]
+): string {
+	let outputStrings: string[] = [];
+
+	userInputs.map((userInput, idx) => {
+		outputStrings.push(`# Input
+${userInput}
+
+# Search query
+${searchQueries[idx]}
+
+# Prompt
+${prompts[idx]}
+
+# System output
+${modelResponses[idx]}
+
+------------------------`);
+	});
+
+	return outputStrings.join('\n\n');
 }

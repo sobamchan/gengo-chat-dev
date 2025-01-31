@@ -8,7 +8,7 @@
 	import { default as SystemPost } from '$lib/components/SystemPost.svelte';
 	import { default as PaperComponent } from '$lib/components/Paper.svelte';
 	import { Message } from '$lib/message';
-	import { extractPUIDsFromResponse } from '$lib/utils';
+	import { extractPUIDsFromResponse, formatHistory } from '$lib/utils';
 	import { getDefaultPrompter } from '$lib/prompter';
 	import { goto } from '$app/navigation';
 	import Icon from '@iconify/svelte';
@@ -53,6 +53,10 @@
 	};
 
 	let messages: Message[] = [];
+	let searchQueries: string[] = [];
+	let prompts: string[] = [];
+	let userInputs: string[] = [];
+	let modelResponses: string[] = [];
 
 	let papers = new PaperList([]);
 
@@ -86,7 +90,6 @@
 			currentMessage = '';
 
 			let searchQuery;
-			console.log(messages);
 			if (messages.length === 1) {
 				searchQuery = await fromInputToQuery(messageToSend, selectedModel, modelID);
 			} else {
@@ -98,10 +101,14 @@
 				);
 			}
 
+			userInputs.push(messageToSend);
+
 			console.log(searchQuery);
+			searchQueries.push(searchQuery);
 			await getPapersByQuery(searchQuery).then((paperList) => {
 				const prompt = prompter.generate(paperList, messageToSend);
 				console.log(prompt);
+				prompts.push(prompt);
 
 				fetch('/apis/chat/both', {
 					method: 'POST',
@@ -114,6 +121,7 @@
 				}).then(async (r) => {
 					const j = await r.json();
 					let res = j['content'];
+					modelResponses.push(res);
 					const mentionedPUIDs = extractPUIDsFromResponse(res);
 					let filteredPapers = paperList.filterByPUIDs(mentionedPUIDs);
 
@@ -166,6 +174,16 @@
 				queryFormInput.blur();
 				break;
 		}
+	}
+
+	function handleShowHistoryClick() {
+		const content = formatHistory(userInputs, searchQueries, prompts, modelResponses);
+		const blob = new Blob([content], { type: 'text/plain' });
+		let pom = document.createElement('a');
+		const url = URL.createObjectURL(blob);
+		pom.href = url;
+		pom.setAttribute('download', 'history.txt');
+		pom.click();
 	}
 </script>
 
@@ -247,6 +265,14 @@
 					Send
 				</button>
 			</form>
+
+			{#if messages.length !== 0 && !isGenerating}
+				<button
+					on:click={handleShowHistoryClick}
+					class="btn variant-ghost w-44 py-1 place-self-end text-xs font-extralight"
+					>Download Chat History</button
+				>
+			{/if}
 
 			{#if messages.length === 0}
 				<div class="m-2 mx-2 lg:mx-32">
