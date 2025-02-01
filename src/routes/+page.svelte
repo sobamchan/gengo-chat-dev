@@ -229,7 +229,7 @@
 				{#each messages as msg}
 					<div class="text-left p-2">
 						{#if msg.isSystem}
-							<SystemPost {msg} />
+							<SystemPost {msg} {papers} />
 						{:else}
 							<UserPost {msg} />
 						{/if}

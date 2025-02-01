@@ -10,9 +10,9 @@
 		<div>
 			<span class="badge variant-filled-surface mb-2 text-sm"> You </span>
 
-			<button class="float-right">
+			<!-- <button class="float-right">
 				<Icon icon="mynaui:copy" class="inline" />
-			</button>
+			</button> -->
 		</div>
 
 		<div
