@@ -12,6 +12,7 @@
 	import { getDefaultPrompter } from '$lib/prompter';
 	import { goto } from '$app/navigation';
 	import Icon from '@iconify/svelte';
+	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 
 	import { onMount } from 'svelte';
 	import { ModelType } from '$lib/llm';
@@ -293,10 +294,16 @@
 
 		{#if papers.papers.length !== 0}
 			<div class="my-8">
-				<h2 class="">References</h2>
-				{#each papers.papers as p}
-					<PaperComponent paper={p} />
-				{/each}
+				<Accordion>
+					<AccordionItem close>
+						<svelte:fragment slot="summary">References</svelte:fragment>
+						<svelte:fragment slot="content">
+							{#each papers.papers as p}
+								<PaperComponent paper={p} />
+							{/each}
+						</svelte:fragment>
+					</AccordionItem>
+				</Accordion>
 			</div>
 		{/if}
 	</div>
