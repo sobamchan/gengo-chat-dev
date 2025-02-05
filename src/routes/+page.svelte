@@ -83,6 +83,10 @@
 		return paperList;
 	}
 
+	function delay(time) {
+		return new Promise((resolve) => setTimeout(resolve, time));
+	}
+
 	async function chatSubmitHandler() {
 		if (currentMessage !== '') {
 			isGenerating = true;
@@ -90,17 +94,7 @@
 			const messageToSend = currentMessage;
 			currentMessage = '';
 
-			let searchQuery;
-			if (messages.length === 1) {
-				searchQuery = await fromInputToQuery(messageToSend, selectedModel, modelID);
-			} else {
-				searchQuery = await fromInputAndHistoryToQuery(
-					messages,
-					messageToSend,
-					selectedModel,
-					modelID
-				);
-			}
+			let searchQuery = await fromInputToQuery(messages, messageToSend, selectedModel, modelID);
 
 			userInputs.push(messageToSend);
 

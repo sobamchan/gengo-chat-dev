@@ -40,6 +40,7 @@
             prose-sm
             max-w-none
             w-full
+            text-white
             prose-p:text-white
             prose-p:w-full
             prose-strong:text-white

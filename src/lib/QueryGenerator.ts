@@ -1,7 +1,20 @@
 import type { ModelType } from './llm';
 import type { Message } from './message';
 
-export async function fromInputToQuery(input: string, modelType: ModelType, modelID: string) {
+export async function fromInputToQuery(
+	messages: Message[],
+	input: string,
+	modelType: ModelType,
+	modelID: string
+) {
+	if (messages.length === 1) {
+		return await fromInputOnlyToQuery(input, modelType, modelID);
+	} else {
+		return await fromInputAndHistoryToQuery(messages, input, modelType, modelID);
+	}
+}
+
+export async function fromInputOnlyToQuery(input: string, modelType: ModelType, modelID: string) {
 	const prompt = `
 Convert the following text to a non-question plain natural language query without symbols suitable for semantic search. Do not drop technical terms. Generate only the query, nothing else.
 Text: ${input}`;
