@@ -83,10 +83,6 @@
 		return paperList;
 	}
 
-	function delay(time) {
-		return new Promise((resolve) => setTimeout(resolve, time));
-	}
-
 	async function chatSubmitHandler() {
 		if (currentMessage !== '') {
 			isGenerating = true;
