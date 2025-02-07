@@ -24,9 +24,6 @@ export const _generate = async (
 		modelID = 'meta/meta-llama-3-8b-instruct';
 	}
 
-	console.log(modelType);
-	console.log(modelID);
-
 	let responseStr = '';
 	if (modelType === ModelType.ollama) {
 		const ollama = new ChatOllama({

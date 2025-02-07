@@ -21,7 +21,7 @@
 	let documentNumber = 10;
 	let modelID = 'meta-llama/Llama-3.3-70B-Instruct-Turbo';
 	onMount(async () => {
-		let _currentSelectedModel = localStorage.getItem('modelType');
+		let _currentSelectedModel = localStorage.getItem('modelType') || 'togetherai';
 		if (_currentSelectedModel === null) {
 			_currentSelectedModel === 'togetherai';
 		}
@@ -96,7 +96,7 @@
 
 			console.log(searchQuery);
 			searchQueries.push(searchQuery);
-			await getPapersByQuery(searchQuery).then((paperList) => {
+			getPapersByQuery(searchQuery).then((paperList) => {
 				const prompt = prompter.generate(paperList, messageToSend);
 				console.log(prompt);
 				prompts.push(prompt);
