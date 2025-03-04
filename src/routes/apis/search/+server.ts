@@ -11,13 +11,20 @@ export async function POST({ request }) {
 	const j = await request.json();
 	const vector: number[] = j['vector'];
 	const limit: number = Number(j['limit']);
+	const filters: Map = j.filters || null;
 
-	const searchedPapers = await client.search(QDRANT_COLLECTION_NAME, {
+	let requestValue = {
 		vector: { name: 'overview', vector },
 		limit,
 		with_vector: false,
 		with_payload: { exclude: ['fulltext'] }
-	});
+	};
+
+	if (filters !== null) {
+		requestValue['filter'] = filters;
+	}
+
+	const searchedPapers = await client.search(QDRANT_COLLECTION_NAME, requestValue);
 
 	return json({ searchedPapers }, { status: 201 });
 }

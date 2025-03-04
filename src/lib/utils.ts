@@ -1,3 +1,4 @@
+import type { URL } from 'url';
 import { Message } from './message';
 
 export function extractPUIDsFromResponse(res: string): string[] {
@@ -53,4 +54,17 @@ ${modelResponses[idx]}
 	});
 
 	return outputStrings.join('\n\n');
+}
+
+export function parseURLParamsToFilters(url: URL): Map<string, string> {
+	const searchParams = url.searchParams;
+	let params = new Map();
+	params['must'] = [];
+	const targetKeys = ['collection_id', 'volume_id'];
+	for (const [key, value] of searchParams) {
+		if (targetKeys.includes(key)) {
+			params.must.push({ key, match: { value } });
+		}
+	}
+	return params;
 }

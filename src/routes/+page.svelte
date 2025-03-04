@@ -1,14 +1,13 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { QdrantClient } from '@qdrant/js-client-rest';
 	import { pipeline } from '@xenova/transformers';
 	import { Paper, PaperList } from '$lib/paper';
-	import { fromInputAndHistoryToQuery, fromInputToQuery } from '$lib/QueryGenerator';
+	import { fromInputToQuery } from '$lib/QueryGenerator';
 	import { default as UserPost } from '$lib/components/UserPost.svelte';
 	import { default as SystemPost } from '$lib/components/SystemPost.svelte';
 	import { default as PaperComponent } from '$lib/components/Paper.svelte';
 	import { Message } from '$lib/message';
-	import { extractPUIDsFromResponse, formatHistory } from '$lib/utils';
+	import { extractPUIDsFromResponse, formatHistory, parseURLParamsToFilters } from '$lib/utils';
 	import { getDefaultPrompter } from '$lib/prompter';
 	import { goto } from '$app/navigation';
 	import Icon from '@iconify/svelte';
@@ -53,6 +52,9 @@
 		chatSubmitHandler();
 	};
 
+	// extract parameters from the current URL
+	const filters = parseURLParamsToFilters($page.url);
+
 	let messages: Message[] = [];
 	let searchQueries: string[] = [];
 	let prompts: string[] = [];
@@ -72,9 +74,10 @@
 			{ pooling: 'cls', normalize: false }
 		);
 		const vector = output.tolist()[0];
+
 		const searchedPapersResponse = await fetch('/apis/search', {
 			method: 'POST',
-			body: JSON.stringify({ vector: vector, limit: documentNumber }),
+			body: JSON.stringify({ vector: vector, limit: documentNumber, filters }),
 			headers: { 'Content-Type': 'application/json' }
 		});
 		const searchedPapersJson = await searchedPapersResponse.json();
@@ -211,6 +214,16 @@
 								</button>
 							</div>
 						</div>
+					</div>
+				</div>
+			{/if}
+
+			{#if filters.must.length !== 0}
+				<div class="alert variant-filled-secondary my-4">
+					<div>
+						<p>
+							Applied filters: {filters.must.map((f) => f.key + ': ' + f.match.value).join(', ')}
+						</p>
 					</div>
 				</div>
 			{/if}
