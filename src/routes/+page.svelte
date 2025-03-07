@@ -220,8 +220,11 @@
 
 			{#if filters.must.length !== 0}
 				<div class="alert variant-filled-secondary my-4">
+					<a href="/" target="_self" class="btn-icon px-2 py-0">
+						<Icon icon="material-symbols:cancel-outline-rounded" height="32" class="inline" />
+					</a>
 					<div>
-						<p>
+						<p class="inline">
 							Applied filters: {filters.must.map((f) => f.key + ': ' + f.match.value).join(', ')}
 						</p>
 					</div>
