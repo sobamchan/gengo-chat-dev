@@ -2,20 +2,21 @@
 	import { RangeSlider } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
 
-	const modelOptions = ['ollama', 'replicate', 'togetherai'];
-	let selectedModel = modelOptions[2];
-
 	let documentNumber = 10;
-	let max = 30;
+	let maxDocumentNumber = 15;
 
-	let modelName = 'meta-llama/Llama-3.3-70B-Instruct-Turbo';
+	const modelOptions = [
+		'meta-llama/Llama-3.3-70B-Instruct-Turbo',
+		'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo-128K',
+		'mistralai/Mistral-7B-Instruct-v0.3',
+		'mistralai/Mixtral-8x7B-Instruct-v0.1',
+		'mistralai/Mixtral-8x7B-Instruct-v0.1',
+		'mistralai/Mistral-Small-24B-Instruct-2501',
+		'mistralai/Mixtral-8x22B-Instruct-v0.1'
+	];
+	let modelName = modelOptions[0];
 
 	onMount(() => {
-		const currentSelectedModel = localStorage.getItem('modelType');
-		if (currentSelectedModel !== null) {
-			selectedModel = currentSelectedModel;
-		}
-
 		const currentDocumentNumber = localStorage.getItem('documentNumber');
 		if (currentDocumentNumber !== null) {
 			documentNumber = Number(currentDocumentNumber);
@@ -27,50 +28,44 @@
 		}
 	});
 	const updateSetting = () => {
-		localStorage.setItem('modelType', selectedModel);
 		localStorage.setItem('documentNumber', documentNumber);
 		localStorage.setItem('modelID', modelName);
 	};
 </script>
 
-<div class="p-4">
-	{#each modelOptions as modelOption}
-		<label>
-			<input
-				type="radio"
-				name="model"
-				value={modelOption}
-				bind:group={selectedModel}
+<div class="p-4 my-8 mx-16">
+	<div class="pt-4">
+		<form class="max-w-md">
+			<label for="modelOption">Model Name</label>
+			<select
+				id="modelOption"
+				class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+				bind:value={modelName}
 				on:change={updateSetting}
-			/>
-			{modelOption}
-		</label>
-	{/each}
-
-	<div class="w-48 pt-4">
+			>
+				{#each modelOptions as modelOption}
+					{#if modelOption === modelName}
+						<option value={modelOption} selected>{modelOption}</option>
+					{:else}
+						<option value={modelOption}>{modelOption}</option>
+					{/if}
+				{/each}
+			</select>
+		</form>
+	</div>
+	<div class="w-48 pt-4 mt-8">
 		<RangeSlider
 			name="range-slider"
 			bind:value={documentNumber}
-			max={25}
+			max={maxDocumentNumber}
 			step={1}
 			ticked
 			on:change={updateSetting}
 		>
 			<div class="flex justify-between items-center">
 				<div class="text-xs">Number of documents to retrieve</div>
-				<div class="text-xs">{documentNumber} / {max}</div>
+				<div class="text-xs">{documentNumber} / {maxDocumentNumber}</div>
 			</div>
 		</RangeSlider>
-	</div>
-
-	<div class="pt-4">
-		Model Name
-		<input
-			type="text"
-			id="default-input"
-			class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-			bind:value={modelName}
-			on:change={updateSetting}
-		/>
 	</div>
 </div>

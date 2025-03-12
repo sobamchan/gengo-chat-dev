@@ -29,7 +29,10 @@
 				<strong class="text-xl uppercase"><a href="/">gengo-chat</a></strong>
 			</svelte:fragment>
 			<!-- <svelte:fragment slot="trail"><a href="/setting">Setting</a></svelte:fragment> -->
-			<svelte:fragment slot="trail"><a href="/about">About</a></svelte:fragment>
+			<svelte:fragment slot="trail">
+				<a href="/setting">Setting</a>
+				<a href="/about">About</a>
+			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
 	<slot />
