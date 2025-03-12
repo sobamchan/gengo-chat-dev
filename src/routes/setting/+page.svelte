@@ -10,7 +10,6 @@
 		'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo-128K',
 		'mistralai/Mistral-7B-Instruct-v0.3',
 		'mistralai/Mixtral-8x7B-Instruct-v0.1',
-		'mistralai/Mixtral-8x7B-Instruct-v0.1',
 		'mistralai/Mistral-Small-24B-Instruct-2501',
 		'mistralai/Mixtral-8x22B-Instruct-v0.1'
 	];
