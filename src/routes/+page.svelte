@@ -54,6 +54,7 @@
 
 	// extract parameters from the current URL
 	const filters = parseURLParamsToFilters($page.url);
+	const filtersParamsURL = $page.url.search;
 
 	let messages: Message[] = [];
 	let searchQueries: string[] = [];
@@ -147,12 +148,11 @@
 			highlightPaperIndex = Number($page.url.hash.replace('#pp-', ''));
 			selectedPaper = papers.papers[highlightPaperIndex - 1];
 			isHiddenModal = false;
-			goto('/', { replaceState: false });
 		}
 	};
 	const handleCloseModal = () => {
 		isHiddenModal = true;
-		goto('/', { replaceState: false });
+		goto(`/${filtersParamsURL}`, { replaceState: false });
 	};
 	$: handleFetch($page.url.search);
 
