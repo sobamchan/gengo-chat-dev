@@ -11,7 +11,7 @@
 			/>
 		</div>
 		<div class="col-span-2">
-			<span class="italic">GenGO Chat</span> is developed by
+			<span class="italic">GenGO Ultra</span> is developed by
 			<a href="https://sotaro.io/about" class="underline hover:bg-secondary-500/50">me</a>
 			at
 			<a

@@ -26,7 +26,7 @@
 	<svelte:fragment slot="header">
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<strong class="text-xl uppercase"><a href="/">gengo-chat</a></strong>
+				<strong class="text-xl italic"><a href="/">GenGO Ultra</a></strong>
 			</svelte:fragment>
 			<!-- <svelte:fragment slot="trail"><a href="/setting">Setting</a></svelte:fragment> -->
 			<svelte:fragment slot="trail">
