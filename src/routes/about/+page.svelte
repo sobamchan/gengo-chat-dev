@@ -54,6 +54,13 @@
 							class="underline italic hover:bg-secondary-500/50">GenGO</a
 						>
 					</li>
+					<li>
+						<a
+							target="_blank"
+							href="https://github.com/sobamchan/gengo-chat-dev"
+							class="underline italic hover:bg-secondary-500/50">GitHub</a
+						>
+					</li>
 				</ul>
 			</div>
 		</div>
