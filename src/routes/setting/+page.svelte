@@ -12,7 +12,9 @@
 		'mistralai/Mixtral-8x7B-Instruct-v0.1',
 		'mistralai/Mistral-Small-24B-Instruct-2501',
 		'mistralai/Mixtral-8x22B-Instruct-v0.1',
-		'google/gemma-2-27b-it'
+		'google/gemma-2-27b-it',
+		'meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8',
+		'meta-llama/Llama-4-Scout-17B-16E-Instruct'
 	];
 	let modelName = modelOptions[0];
 
