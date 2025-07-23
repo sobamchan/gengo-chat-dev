@@ -6,8 +6,8 @@
 	let maxDocumentNumber = 25;
 
 	const modelOptions = [
-		'meta-llama/Llama-4-Scout-17B-16E-Instruct',
 		'meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8',
+		'meta-llama/Llama-4-Scout-17B-16E-Instruct',
 		'meta-llama/Llama-3.3-70B-Instruct-Turbo',
 		'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo-128K',
 		'mistralai/Mistral-7B-Instruct-v0.3',
