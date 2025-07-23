@@ -61,6 +61,13 @@
 							class="underline hover:bg-secondary-500/50">GitHub</a
 						>
 					</li>
+					<li>
+						<a
+							target="_blank"
+							href="https://gengo.sotaro.io/2025.acl-demo.24"
+							class="underline hover:bg-secondary-500/50">Paper</a
+						>
+					</li>
 				</ul>
 			</div>
 		</div>
