@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 
 	let documentNumber = 10;
-	let maxDocumentNumber = 15;
+	let maxDocumentNumber = 25;
 
 	const modelOptions = [
 		'meta-llama/Llama-3.3-70B-Instruct-Turbo',
@@ -16,7 +16,7 @@
 		'meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8',
 		'meta-llama/Llama-4-Scout-17B-16E-Instruct'
 	];
-	let modelName = modelOptions[0];
+	let modelName = modelOptions[-1];
 
 	onMount(() => {
 		const currentDocumentNumber = localStorage.getItem('documentNumber');
