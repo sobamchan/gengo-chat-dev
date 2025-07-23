@@ -2,21 +2,21 @@
 	import { RangeSlider } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
 
-	let documentNumber = 10;
+	let documentNumber = 20;
 	let maxDocumentNumber = 25;
 
 	const modelOptions = [
+		'meta-llama/Llama-4-Scout-17B-16E-Instruct',
+		'meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8',
 		'meta-llama/Llama-3.3-70B-Instruct-Turbo',
 		'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo-128K',
 		'mistralai/Mistral-7B-Instruct-v0.3',
 		'mistralai/Mixtral-8x7B-Instruct-v0.1',
 		'mistralai/Mistral-Small-24B-Instruct-2501',
 		'mistralai/Mixtral-8x22B-Instruct-v0.1',
-		'google/gemma-2-27b-it',
-		'meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8',
-		'meta-llama/Llama-4-Scout-17B-16E-Instruct'
+		'google/gemma-2-27b-it'
 	];
-	let modelName = modelOptions[-1];
+	let modelName = modelOptions[0];
 
 	onMount(() => {
 		const currentDocumentNumber = localStorage.getItem('documentNumber');
