@@ -10,7 +10,7 @@ export async function POST({ request }) {
 	const message: string = j['message'];
 
 	const response = await together.chat.completions.create({
-		model: 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo',
+		model: 'google/gemma-4-31B-it',
 		messages: [{ role: 'user', content: message }]
 	});
 
